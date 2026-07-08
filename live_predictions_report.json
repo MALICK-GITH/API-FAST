@@ -1,0 +1,211 @@
+{
+  "timestamp": "2026-07-08T13:33:07.831898",
+  "total_matches": 3,
+  "processed_matches": 3,
+  "matches": [
+    {
+      "match": {
+        "id": 734915710,
+        "home": "Barcelone",
+        "away": "Galatasaray",
+        "league": "FC 26. 5x5 Rush. Superligue"
+      },
+      "prediction": {
+        "family": "RUSH",
+        "league": "FC 26. 5x5 Rush. Superligue",
+        "match_id": 734915710,
+        "platform_mapping": {
+          "handicap": {
+            "platform_name": "Handicap",
+            "platform_value": 0,
+            "predicted": 0.06017310876912951
+          },
+          "total_goals": {
+            "platform_name": "Total Goals",
+            "platform_value": 9.5,
+            "predicted": 7.3290834735766195
+          }
+        },
+        "predictions": {
+          "match_result": {
+            "confidence": 0.4995617493535561,
+            "prediction": "home_win",
+            "probabilities": {
+              "away_win": 0.22584706281153188,
+              "draw": 0.2745911878349121,
+              "home_win": 0.4995617493535561
+            }
+          },
+          "over_under": {
+            "confidence": 0.7,
+            "prediction": "over",
+            "threshold": 6.5
+          },
+          "total_goals": {
+            "confidence": 0.7,
+            "platform_value": 9.5,
+            "predicted": 7.3290834735766195
+          },
+          "total_parity": {
+            "confidence": 0.5549658488176545,
+            "prediction": "even"
+          }
+        },
+        "success": true,
+        "team_away": "Galatasaray",
+        "team_home": "Barcelone",
+        "timestamp": 1783516200
+      },
+      "platform_odds": {
+        "home_win": {
+          "value": 1.096,
+          "param": null
+        },
+        "draw": {
+          "value": 6.14,
+          "param": null
+        },
+        "away_win": {
+          "value": 30,
+          "param": null
+        }
+      }
+    },
+    {
+      "match": {
+        "id": 734917661,
+        "home": "Fenerbahçe",
+        "away": "Lombardia",
+        "league": "FC 26. 5x5 Rush. Superligue"
+      },
+      "prediction": {
+        "family": "RUSH",
+        "league": "FC 26. 5x5 Rush. Superligue",
+        "match_id": 734917661,
+        "platform_mapping": {
+          "handicap": {
+            "platform_name": "Handicap",
+            "platform_value": 0,
+            "predicted": -0.20437886722453236
+          },
+          "total_goals": {
+            "platform_name": "Total Goals",
+            "platform_value": 9.5,
+            "predicted": 7.901100804397718
+          }
+        },
+        "predictions": {
+          "match_result": {
+            "confidence": 0.4616739847583108,
+            "prediction": "away_win",
+            "probabilities": {
+              "away_win": 0.4616739847583108,
+              "draw": 0.10699385687763563,
+              "home_win": 0.43133215836405364
+            }
+          },
+          "over_under": {
+            "confidence": 0.7,
+            "prediction": "over",
+            "threshold": 6.5
+          },
+          "total_goals": {
+            "confidence": 0.7,
+            "platform_value": 9.5,
+            "predicted": 7.901100804397718
+          },
+          "total_parity": {
+            "confidence": 0.8057223095684266,
+            "prediction": "odd"
+          }
+        },
+        "success": true,
+        "team_away": "Lombardia",
+        "team_home": "Fenerbahçe",
+        "timestamp": 1783516800
+      },
+      "platform_odds": {
+        "home_win": {
+          "value": 3.375,
+          "param": null
+        },
+        "draw": {
+          "value": 6.59,
+          "param": null
+        },
+        "away_win": {
+          "value": 1.575,
+          "param": null
+        }
+      }
+    },
+    {
+      "match": {
+        "id": 734919973,
+        "home": "Arsenal",
+        "away": "Everton",
+        "league": "FC 24. 4x4. Championnat d'Angleterre"
+      },
+      "prediction": {
+        "family": "HIGHSCORE",
+        "league": "FC 24. 4x4. Championnat d'Angleterre",
+        "match_id": 734919973,
+        "platform_mapping": {
+          "handicap": {
+            "platform_name": "Handicap",
+            "platform_value": 1,
+            "predicted": 0.6985904514946784
+          },
+          "total_goals": {
+            "platform_name": "Total Goals",
+            "platform_value": 10,
+            "predicted": 15.596395772769524
+          }
+        },
+        "predictions": {
+          "match_result": {
+            "confidence": 0.55035129678497,
+            "prediction": "home_win",
+            "probabilities": {
+              "away_win": 0.36792040878727006,
+              "draw": 0.08172829442775972,
+              "home_win": 0.55035129678497
+            }
+          },
+          "over_under": {
+            "confidence": 0.7,
+            "prediction": "over",
+            "threshold": 12.0
+          },
+          "total_goals": {
+            "confidence": 0.7,
+            "platform_value": 10,
+            "predicted": 15.596395772769524
+          },
+          "total_parity": {
+            "confidence": 0.6855781838924885,
+            "prediction": "even"
+          }
+        },
+        "success": true,
+        "team_away": "Everton",
+        "team_home": "Arsenal",
+        "timestamp": 1783518000
+      },
+      "platform_odds": {
+        "home_win": {
+          "value": 1.61,
+          "param": null
+        },
+        "draw": {
+          "value": 9.06,
+          "param": null
+        },
+        "away_win": {
+          "value": 2.85,
+          "param": null
+        }
+      }
+    }
+  ]
+}
