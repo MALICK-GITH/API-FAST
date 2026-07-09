@@ -13,7 +13,7 @@ L'API FIFA Prediction fournit des prédictions de matchs FIFA en utilisant des m
 - **Méthode:** POST pour les prédictions
 
 ### Environnement de Production
-- **URL de base:** `https://api-fast-qnvg.onrender.com`
+- **URL de base:** `https://api-fast-82wa.onrender.com`
 - **Port:** 443 (HTTPS)
 - **Format:** JSON
 - **Méthode:** POST pour les prédictions
