@@ -59,9 +59,9 @@ for filename in os.listdir(models_dir):
                     'result_model': model,
                     'result_features': features
                 }
-                print(f"  ✓ {league_name}")
+                print(f"  [OK] {league_name}")
         except Exception as e:
-            print(f"  ✗ Erreur chargement {filename}: {e}")
+            print(f"  [ERROR] Erreur chargement {filename}: {e}")
 
 # Charger les modèles de buts et parité
 for league_key in models_by_league.keys():
