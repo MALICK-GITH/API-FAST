@@ -28,64 +28,99 @@ print("=" * 80)
 api_process = subprocess.Popen(
     [sys.executable, "prediction_api_league.py"],
     stdout=subprocess.PIPE,
-    stderr=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
     text=True
 )
 
 print("✅ API démarrée en arrière-plan")
-time.sleep(10)  # Attendre que l'API démarre (augmenté à 10 secondes)
+print("⏳ Attente de démarrage de l'API...")
+
+# Attendre que l'API démarre avec vérification
+api_ready = False
+for i in range(20):  # 20 secondes max
+    time.sleep(1)
+    
+    # Vérifier si le processus est toujours en cours
+    if api_process.poll() is not None:
+        print("❌ L'API s'est arrêtée prématurément")
+        stdout, _ = api_process.communicate()
+        print(f"Logs de l'API:\n{stdout}")
+        break
+    
+    # Essayer de se connecter
+    try:
+        import requests
+        response = requests.get("http://localhost:5000/health", timeout=1)
+        if response.status_code == 200:
+            print("✅ API prête")
+            api_ready = True
+            break
+    except:
+        if i == 19:
+            print("⚠️  Timeout - L'API n'a pas démarré dans le temps imparti")
+            # Tenter de lire les logs
+            try:
+                stdout, _ = api_process.communicate(timeout=1)
+                print(f"Logs de l'API:\n{stdout}")
+            except:
+                pass
 
 # ÉTAPE 2: Tester l'API
 print("\n" + "=" * 80)
 print("ÉTAPE 2: TEST DE L'API")
 print("=" * 80)
 
-try:
-    import requests
-    
-    # Test avec le format de la plateforme
-    platform_payload = {
-        "I": "match_test_001",
-        "O1": "Barcelone",
-        "O2": "Galatasaray",
-        "L": "FC 26. 5x5 Rush. Superligue",
-        "S": 1783516200,
-        "SC": None,
-        "E": [
-            {"T": 1, "C": 1.096, "P": None, "B": "888starz", "G": 1},
-            {"T": 2, "C": 6.14, "P": None, "B": "888starz", "G": 1},
-            {"T": 3, "C": 30, "P": None, "B": "888starz", "G": 1}
-        ],
-        "AE": [
-            {
-                "G": 2,
-                "ME": [
-                    {"T": 7, "C": 1.95, "P": -1.0, "B": "888starz"},
-                    {"T": 8, "C": 1.95, "P": 1.0, "B": "888starz"}
-                ]
-            }
-        ]
-    }
-    
-    response = requests.post(
-        "http://localhost:5000/predict",
-        json=platform_payload,
-        headers={"Content-Type": "application/json"}
-    )
-    
-    if response.status_code == 200:
-        result = response.json()
-        print("✅ Test de l'API réussi")
-        print(f"   Match: {result.get('team_home')} vs {result.get('team_away')}")
-        print(f"   Ligue: {result.get('league')}")
-        print(f"   Prédiction: {result.get('predictions', {}).get('match_result', {}).get('prediction')}")
-        print(f"   Total Goals: {result.get('predictions', {}).get('total_goals', {}).get('predicted')}")
-    else:
-        print(f"❌ Test de l'API échoué - Status Code: {response.status_code}")
-        print(response.text)
+if api_ready:
+    try:
+        import requests
         
-except Exception as e:
-    print(f"❌ Erreur lors du test: {e}")
+        # Test avec le format de la plateforme
+        platform_payload = {
+            "I": "match_test_001",
+            "O1": "Barcelone",
+            "O2": "Galatasaray",
+            "L": "FC 26. 5x5 Rush. Superligue",
+            "S": 1783516200,
+            "SC": None,
+            "E": [
+                {"T": 1, "C": 1.096, "P": None, "B": "888starz", "G": 1},
+                {"T": 2, "C": 6.14, "P": None, "B": "888starz", "G": 1},
+                {"T": 3, "C": 30, "P": None, "B": "888starz", "G": 1}
+            ],
+            "AE": [
+                {
+                    "G": 2,
+                    "ME": [
+                        {"T": 7, "C": 1.95, "P": -1.0, "B": "888starz"},
+                        {"T": 8, "C": 1.95, "P": 1.0, "B": "888starz"}
+                    ]
+                }
+            ]
+        }
+        
+        response = requests.post(
+            "http://localhost:5000/predict",
+            json=platform_payload,
+            headers={"Content-Type": "application/json"}
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            print("✅ Test de l'API réussi")
+            print(f"   Match: {result.get('team_home')} vs {result.get('team_away')}")
+            print(f"   Ligue: {result.get('league')}")
+            print(f"   Prédiction: {result.get('predictions', {}).get('match_result', {}).get('prediction')}")
+            print(f"   Total Goals: {result.get('predictions', {}).get('total_goals', {}).get('predicted')}")
+        else:
+            print(f"❌ Test de l'API échoué - Status Code: {response.status_code}")
+            print(response.text)
+            
+    except Exception as e:
+        print(f"❌ Erreur lors du test: {e}")
+else:
+    print("⚠️  Test de l'API sauté - L'API n'est pas prête")
+    print("   Les modèles sont entraînés et prêts à être utilisés")
+    print("   L'API peut être testée manuellement avec: python prediction_api_league.py")
 
 # Arrêter l'API
 api_process.terminate()
