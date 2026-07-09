@@ -17,6 +17,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import warnings
 from league_family_mapping import get_league_family, get_family_options, map_prediction_to_platform
+from league_name_mapping import parse_platform_payload
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
@@ -289,7 +290,11 @@ def get_leagues():
 def predict():
     """Prédiction pour un match"""
     data = request.json
-    result = predict_match(data)
+    
+    # Normaliser le payload de la plateforme
+    normalized_data = parse_platform_payload(data)
+    
+    result = predict_match(normalized_data)
     return jsonify(result)
 
 @app.route('/predict/batch', methods=['POST'])
@@ -300,7 +305,9 @@ def predict_batch():
     
     predictions = []
     for match in matches:
-        result = predict_match(match)
+        # Normaliser le payload de la plateforme pour chaque match
+        normalized_match = parse_platform_payload(match)
+        result = predict_match(normalized_match)
         predictions.append(result)
     
     return jsonify({
