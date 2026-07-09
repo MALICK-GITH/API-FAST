@@ -33,7 +33,7 @@ api_process = subprocess.Popen(
 )
 
 print("✅ API démarrée en arrière-plan")
-time.sleep(5)  # Attendre que l'API démarre
+time.sleep(10)  # Attendre que l'API démarre (augmenté à 10 secondes)
 
 # ÉTAPE 2: Tester l'API
 print("\n" + "=" * 80)
